@@ -1,0 +1,229 @@
+{\rtf1\ansi\ansicpg936\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;\f2\fnil\fcharset134 PingFangSC-Regular;
+\f3\fswiss\fcharset0 Helvetica;\f4\fnil\fcharset0 Menlo-Italic;\f5\fmodern\fcharset0 Courier;
+\f6\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red52\green52\blue52;\red0\green0\blue255;\red245\green245\blue245;
+\red38\green38\blue38;\red36\green36\blue36;\red27\green31\blue34;\red231\green231\blue231;\red26\green26\blue26;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww26700\viewh16220\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs32 \cf2 \
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f1\b \cf3 \expnd0\expndtw0\kerning0
+Hardware
+\f0\b0 \cf2 :\
+ALL servers is UCS-C\
+THREE servers: One for Contiv and K8S master, two for k8s nodes\
+One internet link for each server, same link for control and management interface.\
+Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is \'93data\'94 in Linux OS\
+\pard\pardeftab720\sl340\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f1\b \cf3 Software
+\f0\b0 \cf2 :\
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f1\b \cf2 CentOS
+\f0\b0 :\'a0CentOS-7-x86_64-Everything-1611.iso\
+             kernelversion=3.10.0-514.10.2.el7.x86_64, operatingsystem=CentOS Linux 7 (Core)\
+
+\f1\b Docker
+\f0\b0 : install from: 
+\f1\b\fs28 \cb4 http://yum.kubernetes.io/repos/kubernetes-el7-x86_64\
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f0\b0\fs32 \cf2 \cb1 	     Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64\
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f1\b \cf2 K8S
+\f0\b0  :\
+[root@master ~]# kubectl version\
+Client Version: version.Info\{Major:"1", Minor:"5", GitVersion:"v1.5.4", GitCommit:"7243c69eb523aa4377bce883e7c0dd76b84709a1", GitTreeState:"clean", BuildDate:"2017-03-07T23:53:09Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"linux/amd64"\}\
+Server Version: version.Info\{Major:"1", Minor:"4", GitVersion:"v1.4.7", GitCommit:"92b4f971662de9d8770f8dcd2ee01ec226a6f6c0", GitTreeState:"clean", BuildDate:"2016-12-10T04:43:42Z", GoVersion:"go1.6.3", Compiler:"gc", Platform:"linux/amd64"\}\
+
+\f1\b Contiv
+\f0\b0 :  
+\fs28 contiv-full-1.0.0-beta.3 , https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz\
+
+\f1\b\fs32 ACI
+\f0\b0 : multi-POD,2.2(1n)\'a0\
+
+\fs28   \
+
+\f1\b \cf3 Topology
+\f0\b0 \cf2 :
+\fs32 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf2 \kerning1\expnd0\expndtw0 {{\NeXTGraphic Pasted Graphic.tiff \width20080 \height11560
+}¬}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \
+\
+\
+
+\f1\b\fs32 \cf3 \expnd0\expndtw0\kerning0
+Pre-configuration
+\f0\b0 \cf2 :\
+\pard\pardeftab720\sl420\partightenfactor0
+\cf2 All based on the LAB environment\
+0. install CentOS 7 for each server  :-)\
+1. Control/mgmt/internet service port is the same phy interface on the three servers,you can using proxy for internet access\
+2. All access and installation is based on the \'93root\'94 user \
+3. On each of the three Servers:\
+3.1) vi /etc/hosts, includes the three servers, for example on Node1:\
+	127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4\
+	node1-control-ip node1 node1.localdomain\
+	master-control-ip master\
+	node2-control-ip node2\
+	Confirm the /etc/hostname is the same:\
+	[root@node1 ~]# more /etc/hostname\
+	node1.localdomain\
+3.2) disable the firewalld and SElinux:\
+	\kerning1\expnd0\expndtw0 systemctl disable firewalls\
+	vi /etc/selinux/config   make this one: \'93SELINUX = disabled\'94\expnd0\expndtw0\kerning0
+\
+3.3) vi \kerning1\expnd0\expndtw0  /etc/sysconfig/network-scripts/ifcfg-(interface-name)\
+	configure the ONBOOT=yes\
+	make sure the control ip is configured and works\expnd0\expndtw0\kerning0
+\
+3.4) change docker data interface name on node1,node2, for example, change the ten1 on node1 and gig2 on node2 to \'93data\'94,\
+	its prerequisite for this version of Contiv, you may search google how-to.\
+3.5) if Contiv ACI mode, no ip needed on data interface\
+3.6) vi /root/.bashrc , for my environment, there\'92s no need of proxy to outside:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2\fs36 \cf0 \kerning1\expnd0\expndtw0 	
+\f3\i\fs28 printf -v lan '%s,' \'93master-control-ip,node1-control-ip,node2-control-ip" \
+	printf -v service '%s,' 10.254.0.\{2..253\}         //this is the k8s internal cluster/service ip (kubeadm init will use it) \
+	printf -v pool '%s,' 192.168.188.\{1..253\}               //Container ip, there gateway will be ACI BD Subnet(I use 192.168.188.1/24 as gw)\
+	export no_proxy="cisco.com,$\{lan%,\},$\{service%,\},$\{pool%,\},127.0.0.1";\
+	export NO_PROXY=$no_proxy
+\f0\i0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sl420\partightenfactor0
+\cf2 3.7) Someone said you should install the following packages, but i didnt:\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf5 	yum -y install bzip2\
+	easy_install pip\
+	pip install netaddr\
+	yum -y  install python2-crypto.x86_64\
+	yum -y install python2-paramiko
+\f0 \cf2 \
+\pard\pardeftab720\sl420\partightenfactor0
+\cf2 3.8) if using Contiv ACI mode, install lldp is suggested on work node:\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf5 	cd /etc/yum.repos.d/\
+	wget http://download.opensuse.org/repositories/home:vbernat/RHEL_7/home:vbernat.repo\
+	yum -y install lldpd\
+	systemctl enable lldpd\
+	systemctl start lldpd\
+	lldpcli show neighbor    //see the neighbor of ACI Leaf from data interface
+\f0 \cf2 \
+\pard\pardeftab720\sl420\partightenfactor0
+\cf2 4. reboot theses servers\
+\
+
+\f1\b \cf3 Install Kubelet/kubeadm
+\f0\b0 \cf2 \
+\pard\pardeftab720\sl420\partightenfactor0
+
+\f1\b \cf2 reference
+\f0\b0 : \
+\pard\pardeftab720\sl420\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://github.com/contiv/install"}}{\fldrslt \cf2 https://github.com/contiv/install}}\
+{\field{\*\fldinst{HYPERLINK "https://kubernetes.io/docs/getting-started-guides/kubeadm/"}}{\fldrslt https://kubernetes.io/docs/getting-started-guides/kubeadm/}}\
+But I let the node join action at the last step, not as the reference\
+1. On master/node1/node2:\
+	#vi 
+\fs28 \cf6 \cb4 /etc/yum.repos.d/kubernetes.repo
+\fs32 \cf2 \cb1 \
+		
+\f4\i [kubernetes]\
+		name=Kubernetes\
+		baseurl=http://yum.kubernetes.io/repos/kubernetes-el7-x86_64\
+		enabled=1\
+		gpgcheck=1\
+		repo_gpgcheck=1\
+		gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg\
+       		https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+\f0\i0 \
+	#
+\fs28 \cf6 yum install -y docker kubelet kubeadm kubectl kubernetes-cni
+\fs32 \cf2 \
+	#
+\fs28 \cf6 systemctl enable docker && systemctl start docker
+\fs32 \cf2 \
+	#
+\fs28 \cf6 systemctl enable kubelet && systemctl start kubelet
+\fs32 \cf2 \
+	\
+2. initializing the master on master node:\
+	#kubeadm init --api-advertise-addresses=<K8s-Master-IP> --skip-preflight-checks=true --use-kubernetes-version v1.4.7 --service-cidr 10.254.0.0/16     //calm down and waiting :-)\
+	Contiv suggests using cidr 10.254.0.0/16, its the K8S cluster internal ip, service ip\
+	if completed the initial, copy and backup this one:\
+		
+\f4\i\fs36 \kerning1\expnd0\expndtw0 kubeadm join --token=the-token-key  master-ip
+\f2\i0 \cf0  
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\
+\
+3. intall Contiv from master node:\
+	[root@master ~]# 
+\fs28 \cf7 curl -L -O https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz\
+\pard\pardeftab720\sl420\partightenfactor0
+
+\fs32 \cf2 	[root@master ~]# 
+\fs28 \cf7 tar xf contiv-full-1.0.0-beta.3.tgz\
+	
+\fs32 \cf2 [root@master ~]# cd contiv-1.0.0-beta.3/install/k8s/\
+	[root@master k8s]# pwd\
+		/root/contiv-1.0.0-beta.3/install/k8s\
+	[root@master k8s]# ls\
+	aci_gw.yaml  auth_proxy.yaml  contiv_config.yaml  contiv.yaml  contiv.yaml.backup  etcd.yaml  install.sh  uninstall.sh\
+	[root@master k8s]# vi contiv.yaml\
+	change the image to use this for my LAB, you can confirm from the community:\
+	
+\f5 \cf0 \cb8 image: contiv/netplugin:1.0.0-beta.3\cf3 -03-08-2017.18-51-20.UTC\cf9     //there are 
+\f6\b two
+\f5\b0  place need modify in the yaml file
+\f0 \cf2 \cb1 \
+	[root@master contiv-1.0.0-beta.3]# pwd\
+	/root/contiv-1.0.0-beta.3\
+	[root@master contiv-1.0.0-beta.3]#
+\fs28 \cf9  ./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no     // i didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.
+\fs32 \cf2 \
+	calm down and waiting :-)\
+	for this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.\
+	This time you can open another ssh terminal to monitoring the k8s pods status:\
+	[root@master ~]#watch 
+\fs36 kubectl get pods --all-namespaces -o wide\
+\
+4. Join the node1/2 to master:\
+	on node1/2:\
+	#
+\f4\i \kerning1\expnd0\expndtw0 kubeadm join --token=the-token-key  master-ip 
+\f0\i0\fs32 \expnd0\expndtw0\kerning0
+\
+	keep watching on master to get the nodes ready:\
+	[root@master ~]#watch 
+\fs36 kubectl get nodes\
+\
+So far, the installation is completed.\
+
+\fs32 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

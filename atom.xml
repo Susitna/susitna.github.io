@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T23:48:28+08:00</updated>
+  <updated>2017-04-07T23:53:48+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -31,10 +31,16 @@ Each node has a data link , connects  to MultiPOD ACI two pods respectively, lin
 Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64
 <strong>K8S</strong> :
 [root@master ~]# <code>kubectl version</code>
-Client Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;5&rdquo;, GitVersion:&ldquo;v1.5.4&rdquo;, GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd76b84709a1&rdquo;, GitTreeState:&ldquo;clean&rdquo;, BuildDate:&ldquo;2017-03-07T23:53:09Z&rdquo;, GoVersion:&ldquo;go1.7.4&rdquo;, Compiler:&ldquo;gc&rdquo;, Platform:&ldquo;linux/amd64&rdquo;}
-Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVersion:&ldquo;v1.4.7&rdquo;, GitCommit:&ldquo;92b4f971662de9d8770f8dcd2ee01ec226a6f6c0&rdquo;, GitTreeState:&ldquo;clean&rdquo;, BuildDate:&ldquo;2016-12-10T04:43:42Z&rdquo;, GoVersion:&ldquo;go1.6.3&rdquo;, Compiler:&ldquo;gc&rdquo;, Platform:&ldquo;linux/amd64&rdquo;}
+Client Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;5&rdquo;, GitVersion:&ldquo;v1.5.4&rdquo;,
+GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd76b84709a1&rdquo;, GitTreeState:&ldquo;clean&rdquo;,
+BuildDate:&ldquo;2017-03-07T23:53:09Z&rdquo;, GoVersion:&ldquo;go1.7.4&rdquo;, Compiler:&ldquo;gc&rdquo;,
+Platform:&ldquo;linux/amd64&rdquo;}
+Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVersion:&ldquo;v1.4.7&rdquo;,
+GitCommit:&ldquo;92b4f971662de9d8770f8dcd2ee01ec226a6f6c0&rdquo;, GitTreeState:&ldquo;clean&rdquo;,
+BuildDate:&ldquo;2016-12-10T04:43:42Z&rdquo;, GoVersion:&ldquo;go1.6.3&rdquo;, Compiler:&ldquo;gc&rdquo;,
+Platform:&ldquo;linux/amd64&rdquo;}
 <strong>Contiv</strong>:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a>
-<strong>ACI</strong>: multi-POD,2.2(1n) </p>
+<strong>ACI</strong>: multi-POD,2.2(1n)</p>
 
 <p><strong>Topology:</strong>
 <img src="https://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png" alt="avatar" /></p>
@@ -109,7 +115,7 @@ gpgkey=<a href="https://packages.cloud.google.com/yum/doc/yum-key.gpg">https://p
 //calm down and waiting :-)
 Contiv suggests using cidr 10.254.0.0/16, its the K8S cluster internal ip, service ip
 if completed the initial, copy and backup this one:
-kubeadm join &ndash;token=the-token-key  master-ip</p></li>
+<code>kubeadm join --token=the-token-key  master-ip</code></p></li>
 <li><p>intall Contiv from master node:
 [root@master ~]# <code>curl -L -O https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</code>
 [root@master ~]# <code>tar xf contiv-full-1.0.0-beta.3.tgz</code>

@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T23:21:30+08:00</updated>
+  <updated>2017-04-07T23:23:44+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -18,7 +18,9 @@
     <link href="http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/"/>
     <updated>2017-04-07T23:17:29+08:00</updated>
     <id>http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install</id>
-    <content type="html"><![CDATA[<p>Hardware:
+    <content type="html"><![CDATA[<p>Will make the reading be nice sooooooooon!</p>
+
+<p>Hardware:
 ALL servers is UCS-C
 THREE servers: One for Contiv and K8S master, two for k8s nodes
 One internet link for each server, same link for control and management interface.

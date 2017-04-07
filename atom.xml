@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T23:53:48+08:00</updated>
+  <updated>2017-04-07T23:55:23+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -17,6 +17,138 @@
     <title type="html"><![CDATA[Contiv(ACI-mode) for K8S_ Pre-configuration and Install]]></title>
     <link href="http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/"/>
     <updated>2017-04-07T23:17:29+08:00</updated>
+    <id>http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install</id>
+    <content type="html"><![CDATA[**Hardware:**
+ALL servers is UCS-C
+THREE servers: One for Contiv and K8S master, two for k8s nodes
+One internet link for each server, same link for control and management interface.
+Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is “data” in Linux OS
+
+
+**Software:**
+**CentOS**: CentOS-7-x86_64-Everything-1611.iso
+**kernelversion**=3.10.0-514.10.2.el7.x86_64, operatingsystem=CentOS Linux 7 (Core)
+**Docker**: install from: http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64
+**K8S** :
+[root@master ~]# `kubectl version`
+Client Version: version.Info{Major:"1", Minor:"5", GitVersion:"v1.5.4",
+GitCommit:"7243c69eb523aa4377bce883e7c0dd76b84709a1", GitTreeState:"clean",
+BuildDate:"2017-03-07T23:53:09Z", GoVersion:"go1.7.4", Compiler:"gc",
+Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"4", GitVersion:"v1.4.7",
+GitCommit:"92b4f971662de9d8770f8dcd2ee01ec226a6f6c0", GitTreeState:"clean",
+BuildDate:"2016-12-10T04:43:42Z", GoVersion:"go1.6.3", Compiler:"gc",
+Platform:"linux/amd64"}
+**Contiv**:  contiv-full-1.0.0-beta.3 , https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz
+**ACI**: multi-POD,2.2(1n)
+
+**Topology:**
+![avatar](https://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png)
+
+**Pre-configuration:**
+All based on the LAB environment
+0. install CentOS 7 for each server  :-)
+1. Control/mgmt/internet service port is the same phy interface on the three servers,you can using proxy for internet access
+2. All access and installation is based on the “root” user 
+3. On each of the three Servers:
+3.1) `vi /etc/hosts`, includes the three servers, for example on Node1:
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+node1-control-ip node1 node1.localdomain
+master-control-ip master
+node2-control-ip node2
+Confirm the /etc/hostname is the same:
+[root@node1 ~]# `more /etc/hostname`
+node1.localdomain
+3.2) disable the firewalld and SElinux:
+`systemctl disable firewalls`
+`vi /etc/selinux/config`
+make this one: `SELINUX = disabled`
+3.3) `vi  /etc/sysconfig/network-scripts/ifcfg-(interface-name)`
+configure the `ONBOOT=yes`
+make sure the control ip is configured and works
+3.4) change docker data interface name on node1,node2, for example, change the ten1 on node1 and gig2 on node2 to “data”,
+its prerequisite for this version of Contiv, you may search google how-to.
+3.5) if Contiv ACI mode, no ip needed on data interface
+3.6) `vi /root/.bashrc` , for my environment, there’s no need of proxy to outside:
+printf -v lan '%s,' “master-control-ip,node1-control-ip,node2-control-ip" 
+printf -v service '%s,' 10.254.0.{2..253}         //this is the k8s internal cluster/service ip (kubeadm init will use it)
+printf -v pool '%s,' 192.168.188.{1..253}               //Container ip, there gateway will be ACI BD Subnet(I use 192.168.188.1/24 as gw)
+export no_proxy="cisco.com,${lan%,},${service%,},${pool%,},127.0.0.1";
+export NO_PROXY=$no_proxy
+3.7) Someone said you should install the following packages, but i didnt:
+`yum -y install bzip2`
+`easy_install pip`
+`pip install netaddr`
+`yum -y  install python2-crypto.x86_64`
+`yum -y install python2-paramiko`
+3.8) if using Contiv ACI mode, install lldp is suggested on work node:
+`cd /etc/yum.repos.d/`
+`wget http://download.opensuse.org/repositories/home:vbernat/RHEL_7/home:vbernat.repo`
+`yum -y install lldpd`
+`systemctl enable lldpd`
+`systemctl start lldpd`
+`lldpcli show neighbor`    //see the neighbor of ACI Leaf from data interface
+4. reboot theses servers
+
+**Install Kubelet/kubeadm**
+reference:
+https://github.com/contiv/install
+https://kubernetes.io/docs/getting-started-guides/kubeadm/
+But I let the node join action at the last step, not as the reference
+1. On master/node1/node2:
+`vi /etc/yum.repos.d/kubernetes.repo`
+[kubernetes]
+name=Kubernetes
+baseurl=http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+    https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+`yum install -y docker kubelet kubeadm kubectl kubernetes-cni`
+`systemctl enable docker && systemctl start docker`
+ `systemctl enable kubelet && systemctl start kubelet`
+ 
+ 2. initializing the master on master node:
+`kubeadm init --api-advertise-addresses=<K8s-Master-IP> --skip-preflight-checks=true --use-kubernetes-version v1.4.7 --service-cidr 10.254.0.0/16`
+//calm down and waiting :-)
+Contiv suggests using cidr 10.254.0.0/16, its the K8S cluster internal ip, service ip
+if completed the initial, copy and backup this one:
+`kubeadm join --token=the-token-key  master-ip`
+
+3. intall Contiv from master node:
+[root@master ~]# `curl -L -O https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz `
+[root@master ~]# `tar xf contiv-full-1.0.0-beta.3.tgz`
+[root@master ~]# `cd contiv-1.0.0-beta.3/install/k8s/`
+[root@master k8s]# `pwd`
+/root/contiv-1.0.0-beta.3/install/k8s
+[root@master k8s]# `ls`
+aci_gw.yaml  auth_proxy.yaml  contiv_config.yaml  contiv.yaml  contiv.yaml.backup  etcd.yaml  install.sh  uninstall.sh
+[root@master k8s]# `vi contiv.yaml`
+change the image to use this for my LAB, you can confirm from the community:
+image: contiv/netplugin:1.0.0-beta.3-03-08-2017.18-51-20.UTC    //there are two place need modify in the yaml file
+[root@master contiv-1.0.0-beta.3]# `pwd`
+/root/contiv-1.0.0-beta.3
+[root@master contiv-1.0.0-beta.3]#` ./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no `    // i didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.
+calm down and waiting :-)
+for this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.
+This time you can open another ssh terminal to monitoring the k8s pods status:
+[root@master ~]# `watch kubectl get pods --all-namespaces -o wide`
+
+4. Join the node1/2 to master:
+on node1/2:
+`kubeadm join --token=the-token-key  master-ip`
+keep watching on master to get the nodes ready:
+[root@master ~]#`watch kubectl get nodes`
+
+So far, the installation is completed.]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Contiv Aci Mode for K8s Pre Configuration and Install]]></title>
+    <link href="http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/"/>
+    <updated>2017-04-07T00:00:00+08:00</updated>
     <id>http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install</id>
     <content type="html"><![CDATA[<p><strong>Hardware:</strong>
 ALL servers is UCS-C

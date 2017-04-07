@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T21:35:01+08:00</updated>
+  <updated>2017-04-07T21:49:21+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -12,5 +12,14 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Test Blog 1]]></title>
+    <link href="http://susitna.github.io/blog/2017/04/07/test-blog-1/"/>
+    <updated>2017-04-07T21:42:18+08:00</updated>
+    <id>http://susitna.github.io/blog/2017/04/07/test-blog-1</id>
+    <content type="html"><![CDATA[<p>A blog test by Susitna @ 2017-04</p>
+]]></content>
+  </entry>
   
 </feed>

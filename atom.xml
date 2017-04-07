@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-08T06:34:55+08:00</updated>
+  <updated>2017-04-08T06:59:21+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -29,22 +29,22 @@
     <id>http://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to</id>
     <content type="html"><![CDATA[<p><strong>Hardware:</strong></p>
 
-<p>ALL servers is UCS-C<br/>
-THREE servers: One for Contiv and K8S master, two for k8s nodes<br/>
+<p>ALL servers is UCS-C
+THREE servers: One for Contiv and K8S master, two for k8s nodes
 One internet link for each server, same link for control and management interface.<br/>
 Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is “data” in Linux OS</p>
 
-<p><strong>Software:</strong><br/>
-<strong>CentOS</strong>: CentOS-7-x86_64-Everything-1611.iso kernelversion=3.10.0-514.10.2.el7.x86_64, operatingsystem=CentOS Linux 7 (Core)<br/>
+<p><strong>Software:</strong>
+<strong>CentOS</strong>: CentOS-7-x86_64-Everything-1611.iso kernelversion=3.10.0-514.10.2.el7.x86_64, operatingsystem=CentOS Linux 7 (Core)
 <strong>Docker</strong>: install from: <a href="http://yum.kubernetes.io/repos/kubernetes-el7-x86_64">http://yum.kubernetes.io/repos/kubernetes-el7-x86_64</a>
-Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64<br/>
-<strong>K8S</strong> :<br/>
-[root@master ~]# <code>kubectl version</code><br/>
-Client Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;5&rdquo;, GitVersion:&ldquo;v1.5.4&rdquo;,GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd76b84709a1&rdquo;, GitTreeState:&ldquo;clean&rdquo;,BuildDate:&ldquo;2017-03-07T23:53:09Z&rdquo;, GoVersion:&ldquo;go1.7.4&rdquo;, Compiler:&ldquo;gc&rdquo;,
-Platform:&ldquo;linux/amd64&rdquo;}<br/>
-Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVersion:&ldquo;v1.4.7&rdquo;,GitCommit:&ldquo;92b4f971662de9d8770f8dcd2ee01ec226a6f6c0&rdquo;, GitTreeState:&ldquo;clean&rdquo;,BuildDate:&ldquo;2016-12-10T04:43:42Z&rdquo;, GoVersion:&ldquo;go1.6.3&rdquo;, Compiler:&ldquo;gc&rdquo;,
-Platform:&ldquo;linux/amd64&rdquo;}<br/>
-<strong>Contiv</strong>:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a><br/>
+Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64
+<strong>K8S</strong> :
+[root@master ~]# <code>kubectl version</code>
+Client Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;5&rdquo;,
+GitVersion:&ldquo;v1.5.4&rdquo;,GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd76b84709a1&rdquo;, GitTreeState:&ldquo;clean&rdquo;,BuildDate:&ldquo;2017-03-07T23:53:09Z&rdquo;, GoVersion:&ldquo;go1.7.4&rdquo;, Compiler:&ldquo;gc&rdquo;,
+Platform:&ldquo;linux/amd64&rdquo;}
+Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVersion:&ldquo;v1.4.7&rdquo;,GitCommit:&ldquo;92b4f971662de9d8770f8dcd2ee01ec226a6f6c0&rdquo;, GitTreeState:&ldquo;clean&rdquo;,BuildDate:&ldquo;2016-12-10T04:43:42Z&rdquo;, GoVersion:&ldquo;go1.6.3&rdquo;, Compiler:&ldquo;gc&rdquo;,Platform:&ldquo;linux/amd64&rdquo;}
+<strong>Contiv</strong>:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a>
 <strong>ACI</strong>: multi-POD,2.2(1n)</p>
 
 <p><strong>Topology:</strong><br/>

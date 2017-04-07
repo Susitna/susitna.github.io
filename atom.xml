@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-08T07:12:51+08:00</updated>
+  <updated>2017-04-08T07:23:38+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -39,7 +39,7 @@ GitVersion:&ldquo;v1.5.4&rdquo;,GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd7
 
 <h3>Topology:</h3>
 
-<p>if no pic, pls open it in new browser windows <img src="http://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png" alt="avatar" /></p>
+<p>if no pic, pls open it in new browser windows  <img src="http://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png" alt="avatar" /></p>
 
 <h3>Pre-configuration:</h3>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-08T01:04:43+08:00</updated>
+  <updated>2017-04-08T06:21:27+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Contiv Aci Mode for K8s Pre Configuration and Install]]></title>
-    <link href="http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/"/>
-    <updated>2017-04-07T00:00:00+08:00</updated>
-    <id>http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install</id>
+    <title type="html"><![CDATA[Contiv/K8s Check-list and Install How-to]]></title>
+    <link href="http://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to/"/>
+    <updated>2017-04-08T06:18:35+08:00</updated>
+    <id>http://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to</id>
     <content type="html"><![CDATA[<p><strong>Hardware:</strong></p>
 
 <p>ALL servers is UCS-C<br/>

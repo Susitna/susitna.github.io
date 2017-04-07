@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T23:19:30+08:00</updated>
+  <updated>2017-04-07T23:21:30+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -36,7 +36,8 @@ Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVe
 Contiv:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a>
 ACI: multi-POD,2.2(1n) </p>
 
-<p>Topology:</p>
+<p>Topology:
+<img src="https://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png" alt="avatar" /></p>
 
 <p>Pre-configuration:
 All based on the LAB environment

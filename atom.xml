@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-08T07:23:38+08:00</updated>
+  <updated>2017-04-08T07:29:37+08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -29,7 +29,7 @@
     <id>http://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to</id>
     <content type="html"><![CDATA[<h3>Hardware:</h3>
 
-<p>ALL servers is UCS-C THREE servers: One for Contiv and K8S master, two for k8s nodes One internet link for each server, same link for control and management interface. Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is “data” in Linux OS</p>
+<p>ALL servers is UCS-C         THREE servers: One for Contiv and K8S master, two for k8s nodes One internet link for each server, same link for control and management interface. Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is “data” in Linux OS</p>
 
 <h3>Software:</h3>
 

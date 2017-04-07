@@ -1,383 +1,121 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Contiv(ACI-mode) for K8S_ Pre-configuration and Install - Life Collection</title>
-  <meta name="author" content="Susitna">
+<p><strong>Hardware:</strong></p>
 
-  
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/">
-  <link href="/favicon.png" type="image/png" rel="icon">
-  <link href="/atom.xml" rel="alternate" title="Life Collection" type="application/atom+xml">
-
-  <!-- http://opengraphprotocol.org/ -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/">
-  <meta property="og:title" content="Contiv(ACI-mode) for K8S_ Pre-configuration and Install - Life Collection">
-  
-
-  <script src="/javascripts/libs/jquery/jquery-2.1.3.min.js"></script>
-
-<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-  
-  <link href="/stylesheets/screen.css" media="screen, projection, print" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-  <body   >
-    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
-    <div id="wrap">
-      
-        <header role="banner">
-          <nav class="navbar navbar-default" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" title="toggle navbar" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Life Collection</a>
-        </div>
-
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li ><a href="#">Projects</a></li>
-<li ><a href="/blog/archives">Archives</a></li>
-<li ><a href="#">About</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="subscribe-rss" href="/atom.xml" title="subscribe via RSS">
-                        <span class="visible-xs">RSS</span>
-                        <img class="hidden-xs" src="/images/rss.png" alt="RSS">
-                    </a>
-                </li>
-                
-            </ul>
-            
-                <form class="navbar-form navbar-right" action="https://www.google.com/search" method="GET">
-                    <input type="hidden" name="sitesearch" value="susitna.github.io">
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="q" placeholder="Search">
-                    </div>
-                </form>
-            
-        </div>
-    </div>
-</nav>
-
-
-        </header>
-      
-      <div id="main" role="main" class="container">
-        <div id="content">
-          <div class="row">
-  <div class="page-content" itemscope itemtype="http://schema.org/Blog">
-    <meta itemprop="name" content="Life Collection" />
-    
-    <meta itemprop="url" content="http://susitna.github.io" />
-    <article class="hentry" role="article" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-      
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-04-07T23:17:29+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-        
-      </p>
-    
-    
-    <h1 class="entry-title" itemprop="name headline">
-        Contiv(ACI-mode) for K8S_ Pre-configuration and Install
-        
-    </h1>
-    
-  </header>
-
-
-<div class="entry-content clearfix" itemprop="articleBody description"><p>Will make the reading nice, Sooooon!</p>
-
-<p><strong>Hardware:</strong>
-ALL servers is UCS-C
-THREE servers: One for Contiv and K8S master, two for k8s nodes
-One internet link for each server, same link for control and management interface.
+<p>ALL servers is UCS-C<br/>
+THREE servers: One for Contiv and K8S master, two for k8s nodes<br/>
+One internet link for each server, same link for control and management interface.<br/>
 Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is “data” in Linux OS</p>
 
-<p><strong>Software:</strong>
-<strong>CentOS</strong>: CentOS-7-x86_64-Everything-1611.iso
-<strong>kernelversion</strong>=3.10.0-514.10.2.el7.x86_64, operatingsystem=CentOS Linux 7 (Core)
+<p><strong>Software:</strong><br/>
+<strong>CentOS</strong>: CentOS-7-x86_64-Everything-1611.iso kernelversion=3.10.0-514.10.2.el7.x86_64, operatingsystem=CentOS Linux 7 (Core)<br/>
 <strong>Docker</strong>: install from: <a href="http://yum.kubernetes.io/repos/kubernetes-el7-x86_64">http://yum.kubernetes.io/repos/kubernetes-el7-x86_64</a>
-Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64
-<strong>K8S</strong> :
-[root@master ~]# <code>kubectl version</code>
-Client Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;5&rdquo;, GitVersion:&ldquo;v1.5.4&rdquo;,
-GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd76b84709a1&rdquo;, GitTreeState:&ldquo;clean&rdquo;,
-BuildDate:&ldquo;2017-03-07T23:53:09Z&rdquo;, GoVersion:&ldquo;go1.7.4&rdquo;, Compiler:&ldquo;gc&rdquo;,
-Platform:&ldquo;linux/amd64&rdquo;}
-Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVersion:&ldquo;v1.4.7&rdquo;,
-GitCommit:&ldquo;92b4f971662de9d8770f8dcd2ee01ec226a6f6c0&rdquo;, GitTreeState:&ldquo;clean&rdquo;,
-BuildDate:&ldquo;2016-12-10T04:43:42Z&rdquo;, GoVersion:&ldquo;go1.6.3&rdquo;, Compiler:&ldquo;gc&rdquo;,
-Platform:&ldquo;linux/amd64&rdquo;}
-<strong>Contiv</strong>:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a>
+Client/Server: 1.12.6, Package version: docker-common-1.12.6-11.el7.centos.x86_64<br/>
+<strong>K8S</strong> :<br/>
+[root@master ~]# <code>kubectl version</code><br/>
+Client Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;5&rdquo;, GitVersion:&ldquo;v1.5.4&rdquo;,GitCommit:&ldquo;7243c69eb523aa4377bce883e7c0dd76b84709a1&rdquo;, GitTreeState:&ldquo;clean&rdquo;,BuildDate:&ldquo;2017-03-07T23:53:09Z&rdquo;, GoVersion:&ldquo;go1.7.4&rdquo;, Compiler:&ldquo;gc&rdquo;,
+Platform:&ldquo;linux/amd64&rdquo;}<br/>
+Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVersion:&ldquo;v1.4.7&rdquo;,GitCommit:&ldquo;92b4f971662de9d8770f8dcd2ee01ec226a6f6c0&rdquo;, GitTreeState:&ldquo;clean&rdquo;,BuildDate:&ldquo;2016-12-10T04:43:42Z&rdquo;, GoVersion:&ldquo;go1.6.3&rdquo;, Compiler:&ldquo;gc&rdquo;,
+Platform:&ldquo;linux/amd64&rdquo;}<br/>
+<strong>Contiv</strong>:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a><br/>
 <strong>ACI</strong>: multi-POD,2.2(1n)</p>
 
-<p><strong>Topology:</strong>
+<p><strong>Topology:</strong><br/>
 <img src="https://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png" alt="avatar" /></p>
 
-<p><strong>Pre-configuration:</strong>
-All based on the LAB environment
-0. install CentOS 7 for each server  :-)
-1. Control/mgmt/internet service port is the same phy interface on the three servers,you can using proxy for internet access
-2. All access and installation is based on the “root” user
-3. On each of the three Servers:
-3.1) <code>vi /etc/hosts</code>, includes the three servers, for example on Node1:
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-node1-control-ip node1 node1.localdomain
-master-control-ip master
-node2-control-ip node2
-Confirm the /etc/hostname is the same:
-[root@node1 ~]# <code>more /etc/hostname</code>
-node1.localdomain
-3.2) disable the firewalld and SElinux:
-<code>systemctl disable firewalls</code>
-<code>vi /etc/selinux/config</code>
-make this one: <code>SELINUX = disabled</code>
+<p><strong>Pre-configuration:</strong><br/>
+All based on the LAB environment<br/>
+0. install CentOS 7 for each server  :-)<br/>
+1. Control/mgmt/internet service port is the same phy interface on the three servers,you can using proxy for internet access<br/>
+2. All access and installation is based on the “root” user <br/>
+3. On each of the three Servers:<br/>
+3.1) <code>vi /etc/hosts</code>, includes the three servers, for example on Node1:<br/>
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4<br/>
+node1-control-ip node1 node1.localdomain<br/>
+master-control-ip master<br/>
+node2-control-ip node2<br/>
+Confirm the /etc/hostname is the same:<br/>
+[root@node1 ~]# <code>more /etc/hostname</code><br/>
+node1.localdomain<br/>
+3.2) disable the firewalld and SElinux:<br/>
+<code>systemctl disable firewalls</code><br/>
+<code>vi /etc/selinux/config</code><br/>
+make this one: <code>SELINUX = disabled</code><br/>
 3.3) <code>vi  /etc/sysconfig/network-scripts/ifcfg-(interface-name)</code>
 configure the <code>ONBOOT=yes</code>
-make sure the control ip is configured and works
+make sure the control ip is configured and works<br/>
 3.4) change docker data interface name on node1,node2, for example, change the ten1 on node1 and gig2 on node2 to “data”,
-its prerequisite for this version of Contiv, you may search google how-to.
-3.5) if Contiv ACI mode, no ip needed on data interface
-3.6) <code>vi /root/.bashrc</code> , for my environment, there’s no need of proxy to outside:
-printf -v lan &lsquo;%s,&rsquo; “master-control-ip,node1-control-ip,node2-control-ip"
-printf -v service &lsquo;%s,&rsquo; 10.254.0.{2..253}         //this is the k8s internal cluster/service ip (kubeadm init will use it)
-printf -v pool &lsquo;%s,&rsquo; 192.168.188.{1..253}               //Container ip, there gateway will be ACI BD Subnet(I use 192.168.188.1/24 as gw)
-export no_proxy=&ldquo;cisco.com,${lan%,},${service%,},${pool%,},127.0.0.1&rdquo;;
-export NO_PROXY=$no_proxy
-3.7) Someone said you should install the following packages, but i didnt:
-<code>yum -y install bzip2</code>
-<code>easy_install pip</code>
+its prerequisite for this version of Contiv, you may search google how-to.<br/>
+3.5) if Contiv ACI mode, no ip needed on data interface<br/>
+3.6) <code>vi /root/.bashrc</code> , for my environment, there’s no need of proxy to outside:<br/>
+printf -v lan &lsquo;%s,&rsquo; “master-control-ip,node1-control-ip,node2-control-ip" <br/>
+printf -v service &lsquo;%s,&rsquo; 10.254.0.{2..253}         //this is the k8s internal cluster/service ip (kubeadm init will use it)<br/>
+printf -v pool &lsquo;%s,&rsquo; 192.168.188.{1..253}               //Container ip, there gateway will be ACI BD Subnet(I use 192.168.188.1/24 as gw)<br/>
+export no_proxy=&ldquo;cisco.com,${lan%,},${service%,},${pool%,},127.0.0.1&rdquo;;<br/>
+export NO_PROXY=$no_proxy<br/>
+3.7) Someone said you should install the following packages, but i didnt:  <br/>
+<code>yum -y install bzip2</code><br/>
+<code>easy_install pip</code><br/>
 <code>pip install netaddr</code>
 <code>yum -y  install python2-crypto.x86_64</code>
-<code>yum -y install python2-paramiko</code>
-3.8) if using Contiv ACI mode, install lldp is suggested on work node:
-<code>cd /etc/yum.repos.d/</code>
-<code>wget http://download.opensuse.org/repositories/home:vbernat/RHEL_7/home:vbernat.repo</code>
-<code>yum -y install lldpd</code>
-<code>systemctl enable lldpd</code>
-<code>systemctl start lldpd</code>
-<code>lldpcli show neighbor</code>    //see the neighbor of ACI Leaf from data interface
+<code>yum -y install python2-paramiko</code><br/>
+3.8) if using Contiv ACI mode, install lldp is suggested on work node:<br/>
+<code>cd /etc/yum.repos.d/</code><br/>
+<code>wget http://download.opensuse.org/repositories/home:vbernat/RHEL_7/home:vbernat.repo</code><br/>
+<code>yum -y install lldpd</code><br/>
+<code>systemctl enable lldpd</code><br/>
+<code>systemctl start lldpd</code><br/>
+<code>lldpcli show neighbor</code>    //see the neighbor of ACI Leaf from data interface<br/>
 4. reboot theses servers</p>
 
-<p><strong>Install Kubelet/kubeadm</strong>
-reference:
-<a href="https://github.com/contiv/install">https://github.com/contiv/install</a>
-<a href="https://kubernetes.io/docs/getting-started-guides/kubeadm/">https://kubernetes.io/docs/getting-started-guides/kubeadm/</a>
-But I let the node join action at the last step, not as the reference
-1. On master/node1/node2:
-<code>vi /etc/yum.repos.d/kubernetes.repo</code>
-[kubernetes]
-name=Kubernetes
-baseurl=<a href="http://yum.kubernetes.io/repos/kubernetes-el7-x86_64">http://yum.kubernetes.io/repos/kubernetes-el7-x86_64</a>
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=<a href="https://packages.cloud.google.com/yum/doc/yum-key.gpg">https://packages.cloud.google.com/yum/doc/yum-key.gpg</a>
-    <a href="https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg">https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</a>
-<code>yum install -y docker kubelet kubeadm kubectl kubernetes-cni</code>
-<code>systemctl enable docker &amp;&amp; systemctl start docker</code>
- <code>systemctl enable kubelet &amp;&amp; systemctl start kubelet</code></p>
+<p><strong>Install Kubelet/kubeadm</strong><br/>
+reference:<br/>
+<a href="https://github.com/contiv/install">https://github.com/contiv/install</a><br/>
+<a href="https://kubernetes.io/docs/getting-started-guides/kubeadm/">https://kubernetes.io/docs/getting-started-guides/kubeadm/</a><br/>
+But I let the node join action at the last step, not as the reference</p>
 
 <ol>
-<li><p>initializing the master on master node:
-<code>kubeadm init --api-advertise-addresses=&lt;K8s-Master-IP&gt; --skip-preflight-checks=true --use-kubernetes-version v1.4.7 --service-cidr 10.254.0.0/16</code>
-//calm down and waiting :-)
+<li><p>On master/node1/node2:<br/>
+<code>vi /etc/yum.repos.d/kubernetes.repo</code><br/>
+[kubernetes]<br/>
+name=Kubernetes<br/>
+baseurl=<a href="http://yum.kubernetes.io/repos/kubernetes-el7-x86_64">http://yum.kubernetes.io/repos/kubernetes-el7-x86_64</a>
+enabled=1<br/>
+gpgcheck=1<br/>
+repo_gpgcheck=1<br/>
+gpgkey=<a href="https://packages.cloud.google.com/yum/doc/yum-key.gpg">https://packages.cloud.google.com/yum/doc/yum-key.gpg</a><br/>
+ <a href="https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg">https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</a><br/>
+<code>yum install -y docker kubelet kubeadm kubectl kubernetes-cni</code><br/>
+<code>systemctl enable docker &amp;&amp; systemctl start docker</code><br/>
+<code>systemctl enable kubelet &amp;&amp; systemctl start kubelet</code></p></li>
+<li><p>initializing the master on master node:<br/>
+<code>kubeadm init --api-advertise-addresses=&lt;K8s-Master-IP&gt; --skip-preflight-checks=true --use-kubernetes-version v1.4.7 --service-cidr 10.254.0.0/16</code><br/>
+//calm down and waiting :-)<br/>
 Contiv suggests using cidr 10.254.0.0/16, its the K8S cluster internal ip, service ip
-if completed the initial, copy and backup this one:
+if completed the initial, copy and backup this one:<br/>
 <code>kubeadm join --token=the-token-key  master-ip</code></p></li>
-<li><p>intall Contiv from master node:
+<li><p>intall Contiv from master node:<br/>
 [root@master ~]# <code>curl -L -O https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</code>
-[root@master ~]# <code>tar xf contiv-full-1.0.0-beta.3.tgz</code>
-[root@master ~]# <code>cd contiv-1.0.0-beta.3/install/k8s/</code>
-[root@master k8s]# <code>pwd</code>
-/root/contiv-1.0.0-beta.3/install/k8s
-[root@master k8s]# <code>ls</code>
-aci_gw.yaml  auth_proxy.yaml  contiv_config.yaml  contiv.yaml  contiv.yaml.backup  etcd.yaml  install.sh  uninstall.sh
-[root@master k8s]# <code>vi contiv.yaml</code>
+[root@master ~]# <code>tar xf contiv-full-1.0.0-beta.3.tgz</code><br/>
+[root@master ~]# <code>cd contiv-1.0.0-beta.3/install/k8s/</code><br/>
+[root@master k8s]# <code>pwd</code><br/>
+/root/contiv-1.0.0-beta.3/install/k8s<br/>
+[root@master k8s]# <code>ls</code><br/>
+aci_gw.yaml  auth_proxy.yaml  contiv_config.yaml  contiv.yaml  contiv.yaml.backup  etcd.yaml  install.sh  uninstall.sh<br/>
+[root@master k8s]# <code>vi contiv.yaml</code><br/>
 change the image to use this for my LAB, you can confirm from the community:
-<code>image: contiv/netplugin:1.0.0-beta.3-03-08-2017.18-51-20.UTC</code>    //there are two place need modify in the yaml file
-[root@master contiv-1.0.0-beta.3]# <code>pwd</code>
-/root/contiv-1.0.0-beta.3
-[root@master contiv-1.0.0-beta.3]#<code>./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no</code>    // i didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.
-calm down and waiting :-)
-for this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.
-This time you can open another ssh terminal to monitoring the k8s pods status
+<code>image: contiv/netplugin:1.0.0-beta.3-03-08-2017.18-51-20.UTC</code>    //there are two place need modify in the yaml file<br/>
+[root@master contiv-1.0.0-beta.3]# <code>pwd</code><br/>
+/root/contiv-1.0.0-beta.3<br/>
+[root@master contiv-1.0.0-beta.3]#<code>./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no</code>    // i didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.<br/>
+calm down and waiting :-)<br/>
+for this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.<br/>
+This time you can open another ssh terminal to monitoring the k8s pods status<br/>
 [root@master ~]# <code>watch kubectl get pods --all-namespaces -o wide</code></p></li>
-<li><p>Join the node1/2 to master:
-on node1/2:
-<code>kubeadm join --token=the-token-key  master-ip</code>
-keep watching on master to get the nodes ready:
+<li><p>Join the node1/2 to master:<br/>
+on node1/2:<br/>
+<code>kubeadm join --token=the-token-key  master-ip</code><br/>
+keep watching on master to get the nodes ready:<br/>
 [root@master ~]#<code>watch kubectl get nodes</code></p></li>
 </ol>
 
 
 <p>So far, the installation is completed.</p>
-</div>
-
-
-      <footer class="post-footer">
-        <p class="meta text-muted">
-          
-  
-
-
-
-<figure class="author-image">
-    <span class="img" href="/about" style="background-image: url(/images/avatar.jpg)"><span class="hidden">Picture</span></span>
-</figure>
-
-<section class="author">
-    <h4><span class="byline author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="fn" itemprop="name">Susitna</span></span></h4>
-
-    <div class="author-meta">
-        <span class="author-link icon-link"><i class="fa fa-link" aria-hidden="true"></i> <a href="http://susitna.github.io">http://susitna.github.io</a></span>
-    </div>
-</section>
-
-<hr>
-
-<section class="share">
-    
-    <h4>Share this post</h4>
-    
-    <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?url=http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/;" 
-        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-        <span class="hidden">Twitter</span>
-    </a>
-    <a class="fa fa-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-        <span class="hidden">Facebook</span>
-    </a>
-    <a class="fa fa-google-plus" href="https://plus.google.com/share?url=http://susitna.github.io/blog/2017/04/07/contiv-aci-mode-for-k8s-pre-configuration-and-install/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-        <span class="hidden">Google+</span>
-    </a>
-    
-</section>
-
-
-
-
-<!--
-<footer class="post-footer">
-
-
-            <section class="share">
-                <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Instant%20Movie%20Streamer%20v3%20Release&amp;url=http://iyask.me/instant-movie-streamer-v3-release/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://iyask.me/instant-movie-streamer-v3-release/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://iyask.me/instant-movie-streamer-v3-release/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
-            </section>
-
-
-        </footer>
-
-
--->
-          
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-04-07T23:17:29+08:00"  data-updated="true" itemprop="datePublished dateCreated">ordinal</time>
-          <br>
-
-
-        </p>
-        
-      </footer>
-    </article>
-    
-  </div>
-</div>
-
-        </div>
-      </div>
-    </div>
-    <footer role="contentinfo"><div class="container">
-    <p class="text-muted credits">
-  Copyright &copy; 2017 - Susitna<br>
-  <small>
-      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
-      <span class="credit">customized with <a href="https://github.com/bhrigu123/abacus">abacus theme</a></span>.
-  </small>
-</p>
-
-</div>
-</footer>
-    
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/javascripts/modernizr.js"></script>
-
-
-  </body>
-</html>

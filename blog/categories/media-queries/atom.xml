@@ -1,147 +1,24 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Life Collection</title>
-  <meta name="author" content="Susitna">
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Media Queries | Life Collection]]></title>
+  <link href="http://susitna.github.io/blog/categories/media-queries/atom.xml" rel="self"/>
+  <link href="http://susitna.github.io/"/>
+  <updated>2017-04-08T08:19:54+08:00</updated>
+  <id>http://susitna.github.io/</id>
+  <author>
+    <name><![CDATA[Susitna]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://susitna.github.io/">
-  <link href="/favicon.png" type="image/png" rel="icon">
-  <link href="/atom.xml" rel="alternate" title="Life Collection" type="application/atom+xml">
-
-  <!-- http://opengraphprotocol.org/ -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="http://susitna.github.io/">
-  <meta property="og:title" content="Life Collection">
-  
-
-  <script src="/javascripts/libs/jquery/jquery-2.1.3.min.js"></script>
-
-<link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="/assets/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-  
-  <link href="/stylesheets/screen.css" media="screen, projection, print" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-  <body   >
-    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
-    <div id="wrap">
-      
-      <div id="banner-image">
-        <div class="layer">
-          <div id="banner-text">
-            <h1 class="page-title">Life Collection</h1>
-            <p class="page-desc">
-              System Engineer @ Cisco System. Loves Programming,SDN,Container...<br>
-            </p>
-            <br>
-            <br>
-            <div class="page-links center">
-              <ul class="index-nav">
-                  <li ><a href="#">Projects</a></li>
-<li ><a href="/blog/archives">Archives</a></li>
-<li ><a href="#">About</a></li>
-
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="main" role="main" class="container">
-        <div id="content">
-          <div class="row">
-  <div class="page-content">
-    <div class="blog-index" itemscope itemtype="http://schema.org/Blog">
-    <meta itemprop="name" content="Life Collection" />
-    
-    <meta itemprop="url" content="http://susitna.github.io" />
-      
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-04-08T06:27:35+08:00"  data-updated="true" itemprop="datePublished dateCreated">Sat  8 Apr 2017,  6:27 AM</time>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2017/04/08/contiv-slash-swarm-check-list-and-install-how-to/" itemprop="url">Contiv/Swarm Check-list and Install How-to</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><p>Working on it&hellip;.</p>
-</div>
-  
-  
-
-
-        </article>
-      
-      
-        <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-          
-  <header class="page-header">
-    
-      <p class="meta text-muted text-uppercase">
-        
-
-
-
-
-
-
-
-
-
-
-
-
-<span class="glyphicon glyphicon-calendar"></span> <time datetime="2017-04-08T06:18:35+08:00"  data-updated="true" itemprop="datePublished dateCreated">Sat  8 Apr 2017,  6:18 AM</time>
-        
-      </p>
-    
-    
-      <h2 class="entry-title" itemprop="name headline"><a href="/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to/" itemprop="url">Contiv(ACI)/K8s Check-list and Install How-to</a></h2>
-    
-  </header>
-
-
-  <div class="entry-content clearfix" itemprop="articleBody description"><h3>Hardware:</h3>
+  <entry>
+    <title type="html"><![CDATA[Contiv(ACI)/K8s Check-list and Install How-to]]></title>
+    <link href="http://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to/"/>
+    <updated>2017-04-08T06:18:35+08:00</updated>
+    <id>http://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to</id>
+    <content type="html"><![CDATA[<h3>Hardware:</h3>
 
 <p>ALL servers is UCS-C  <br/>
 THREE servers: One for Contiv and K8S master, two for k8s nodes  <br/>
@@ -267,63 +144,7 @@ keep watching on master to get the nodes ready:<br/>
 
 
 <p>So far, the installation is completed.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-        </article>
-      
-    </div>
-
-    <ul class="pager">
-      
-        <li class="previous disabled"><a href="#">&larr;&nbsp;Older</a></li>
-      
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      
-        <li class="next disabled"><a href="#">Newer&nbsp;&rarr;</a></li>
-      
-    </ul>
-  </div>
-</div>
-
-        </div>
-      </div>
-    </div>
-    <footer role="contentinfo"><div class="container">
-    <p class="text-muted credits">
-  Copyright &copy; 2017 - Susitna<br>
-  <small>
-      <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>,
-      <span class="credit">customized with <a href="https://github.com/bhrigu123/abacus">abacus theme</a></span>.
-  </small>
-</p>
-
-</div>
-</footer>
-    
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-<script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/javascripts/modernizr.js"></script>
-
-
-  </body>
-</html>
+</feed>

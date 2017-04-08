@@ -174,7 +174,9 @@ operatingsystem=CentOS Linux 7 (Core)  <br/>
 
 <p><img src="https://susitna.github.io/images/swarm-contiv-top.png" alt="image" />  <br/>
 <em>if no pic, pls open it in new browser windows</em>
-Swarm master physical server, also acts as Contiv Master and Swarm worker.</p>
+Swarm master physical server, also acts as Contiv Master and Swarm worker.     <br/>
+<strong>1. Interenet Access:</strong> nodes need internet access when the installation takes action,while in production environment there should be something like proxy.But in my lab, i just make the mgmt interface also can access internet.  <br/>
+<strong>2. installation role:</strong> in production environment there should use a user id other than root. If that you should make this user , from the install host, can do SSH Passwordless Login to the other target Linux host.</p>
 </div>
 
 

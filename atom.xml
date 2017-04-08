@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T20:28:00-08:00</updated>
+  <updated>2017-04-07T20:32:58-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -90,7 +90,7 @@ Swarm master physical server, also acts as Contiv Master and Swarm worker.     <
 <p><strong>Part-2</strong>:    <br/>
 <strong>1. config repo</strong>  <br/>
 <code>wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code>  <br/>
-<code>rpm -Uvh epel-release-latest-7.noarch.rpm</code>
+<code>rpm -Uvh epel-release-latest-7.noarch.rpm</code>  <br/>
 <strong>2. install required packages</strong>  <br/>
 <code>yum -y install bzip2</code>  <br/>
 <code>easy_install pip</code>  <br/>
@@ -99,7 +99,15 @@ Swarm master physical server, also acts as Contiv Master and Swarm worker.     <
 <code>yum -y install python2-paramiko</code>  <br/>
 <strong>3. update OS</strong>  <br/>
 <code>yum makecache</code>  <br/>
-<code>yum -y upgrade</code></p>
+<code>yum -y upgrade</code>
+<strong>4. install LLDP protocol</strong>  <br/>
+In case i use ACI network, lldp can tell their neighbors for Leaf and server,its helpful for us to do post-install-config the Contiv.  <br/>
+<code>cd /etc/yum.repos.d/</code>  <br/>
+<code>wget http://download.opensuse.org/repositories/home:vbernat/RHEL_7/home:vbernat.repo</code>  <br/>
+<code>yum -y install lldpd</code>  <br/>
+<code>systemctl enable lldpd</code>  <br/>
+<code>systemctl start lldpd</code>  <br/>
+<code>lldpcli show neighbor</code>    <!--see the neighbors--></p>
 ]]></content>
   </entry>
   

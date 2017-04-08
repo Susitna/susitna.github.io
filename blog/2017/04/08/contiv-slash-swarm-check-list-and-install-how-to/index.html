@@ -192,9 +192,18 @@ Swarm master physical server, also acts as Contiv Master and Swarm worker.     <
 <strong>2. diable firewall &amp; SELinux </strong> <br/>
 <code>systemctl disable firewall</code>  <br/>
 <code>vi /etc/selinux/config</code>, configure <code>SELINUX=disabled</code>  <br/>
-REBOOT the Server.</p>
+<em>3. REBOOT</em> the Server.</p>
 
-<p><strong>Part-2</strong>:</p>
+<p><strong>Part-2</strong>:    <br/>
+<strong>1. config repo</strong>  <br/>
+<code>wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code>  <br/>
+<code>rpm -Uvh epel-release-latest-7.noarch.rpm</code>
+<strong>2. install required packages</strong>  <br/>
+<code>yum -y install bzip2
+easy_install pip
+pip install netaddr
+yum -y  install python2-crypto.x86_64
+yum -y install python2-paramiko</code></p>
 </div>
 
 

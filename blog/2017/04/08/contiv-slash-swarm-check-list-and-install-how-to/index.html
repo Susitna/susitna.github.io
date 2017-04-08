@@ -183,10 +183,14 @@ Swarm master physical server, also acts as Contiv Master and Swarm worker.     <
 <h3>pre-Configuration after install CentOS on Master/Worker</h3>
 
 <p><em>Notice</em>: doesn&rsquo;t include the Install host.  <br/>
-1. host env
-<code>vi /etc/hosts</code> , make sure:
-<code>127.0.0.1 localhost</code>
-<code>192.168.151.151 Master   Master.localdomain</code> <!--the control interface ip, same as mgmt interface ip in my lab--></p>
+1. host env  <br/>
+<code>vi /etc/hosts</code> , make sure:  <br/>
+<code>127.0.0.1 localhost</code>  <br/>
+<code>192.168.151.151 Master   Master.localdomain</code> <!--the control interface ip, same as mgmt interface ip in my lab-->   <br/>
+<code>more /etc/hostname</code> make sure the same as above. <br/>
+2. diable firewall &amp; SELinux  <br/>
+<code>systemctl disable firewall</code>  <br/>
+<code>vi /etc/selinux/config</code>, configure <code>SELINUX=disabled</code></p>
 </div>
 
 

@@ -18,6 +18,9 @@
 <loc>http://susitna.github.io/about/</loc>
 </url>
 <url>
+<loc>http://susitna.github.io/blog/categories/octopress/</loc>
+</url>
+<url>
 <loc>http://susitna.github.io/tags/contiv/</loc>
 </url>
 <url>
@@ -31,8 +34,5 @@
 </url>
 <url>
 <loc>http://susitna.github.io/tags/docker/</loc>
-</url>
-<url>
-<loc>http://susitna.github.io/blog/categories/octopress/</loc>
 </url>
 </urlset>

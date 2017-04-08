@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T16:32:36-08:00</updated>
+  <updated>2017-04-07T16:33:41-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Contiv/Swarm Check-list and Install How-to]]></title>
+    <title type="html"><![CDATA[Contiv(ACI)/Swarm Check-list and Install How-to]]></title>
     <link href="http://susitna.github.io/blog/2017/04/08/contiv-slash-swarm-check-list-and-install-how-to/"/>
     <updated>2017-04-08T06:27:35+08:00</updated>
     <id>http://susitna.github.io/blog/2017/04/08/contiv-slash-swarm-check-list-and-install-how-to</id>

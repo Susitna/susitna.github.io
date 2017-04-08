@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T19:53:19-08:00</updated>
+  <updated>2017-04-07T19:54:21-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -78,8 +78,8 @@ Swarm master physical server, also acts as Contiv Master and Swarm worker.     <
 <p><em>Notice</em>: doesn&rsquo;t include the Install host.  <br/>
 1. host env
 <code>vi /etc/hosts</code> , make sure:
-127.0.0.1 localhost  <br/>
-192.168.151.151 Master   Master.localdomain <!--the control interface ip, same as mgmt interface ip in my lab--></p>
+<code>127.0.0.1 localhost</code>
+<code>192.168.151.151 Master   Master.localdomain</code> <!--the control interface ip, same as mgmt interface ip in my lab--></p>
 ]]></content>
   </entry>
   

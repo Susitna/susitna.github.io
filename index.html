@@ -141,13 +141,15 @@
   </header>
 
 
-  <div class="entry-content clearfix" itemprop="articleBody description"><h3>Hardware:</h3>
+  <div class="entry-content clearfix" itemprop="articleBody description"><a name="Hardware:"></a>
+<h3>Hardware:</h3>
 
 <p>ALL servers is UCS-C  <br/>
 THREE servers: One for Contiv and K8S master, two for k8s nodes  <br/>
 One internet link for each server, same link for control and management interface.   <br/>
 Each node has a data link , connects  to MultiPOD ACI two pods respectively, link name is “data” in Linux OS</p>
 
+<a name="Software:"></a>
 <h3>Software:</h3>
 
 <p><strong>CentOS</strong>: CentOS-7-x86_64-Everything-1611.iso  <br/>
@@ -162,11 +164,13 @@ Server Version: version.Info{Major:&ldquo;1&rdquo;, Minor:&ldquo;4&rdquo;, GitVe
 <strong>Contiv</strong>:  contiv-full-1.0.0-beta.3 , <a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a>  <br/>
 <strong>ACI</strong>: multi-POD,2.2(1n)</p>
 
+<a name="Topology:"></a>
 <h3>Topology:</h3>
 
 <p>if no pic, pls open it in new browser windows  <br/>
 <img src="http://github.com/Susitna/susitna.github.io/blob/master/images/k8s-topology.png" alt="avatar" /></p>
 
+<a name="Pre-configuration:"></a>
 <h3>Pre-configuration:</h3>
 
 <p>All based on the LAB environment<br/>
@@ -213,6 +217,7 @@ export NO_PROXY=$no_proxy<br/>
 <code>lldpcli show neighbor</code>    //see the neighbor of ACI Leaf from data interface<br/>
 4. reboot theses servers</p>
 
+<a name="Install.Kubelet.kubeadm"></a>
 <h3>Install Kubelet/kubeadm</h3>
 
 <p>reference:<br/>

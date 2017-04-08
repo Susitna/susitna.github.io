@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T18:57:32-08:00</updated>
+  <updated>2017-04-07T19:11:57-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -18,8 +18,50 @@
     <link href="http://susitna.github.io/blog/2017/04/08/contiv-slash-swarm-check-list-and-install-how-to/"/>
     <updated>2017-04-08T06:27:35+08:00</updated>
     <id>http://susitna.github.io/blog/2017/04/08/contiv-slash-swarm-check-list-and-install-how-to</id>
-    <content type="html"><![CDATA[<p>Hardware,Software,Topology, is same as this blog:   <br/>
-<a href="https://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to/">Contiv(ACI)/K8s Check-list and Install How-to</a></p>
+    <content type="html"><![CDATA[<a name="Hardware"></a>
+<h3>Hardware</h3>
+
+<p>is same as this blog:   <br/>
+<a href="https://susitna.github.io/blog/2017/04/08/contiv-slash-k8s-check-list-and-install-how-to/">Contiv(ACI)/K8s Check-list and Install How-to</a>    <br/>
+ALL servers is UCS-C  <br/>
+THREE servers for Contiv install host, Swarm Master, Swarm Worker node.  <br/>
+One internet link for each server, same link for Swarm/Worker control interface.  <br/>
+Swarm Master and worker, each has one data link to MultiPOD ACI two pods respectively.  <br/>
+<strong>Please notice</strong> there is a individual server using as   Contiv install host,this server has no other function,such as Swarm or Contiv Master  <br/>
+<img src="https://susitna.github.io/images/Swarm-Contiv-install.png" alt="image" /></p>
+
+<a name="Software"></a>
+<h3>Software</h3>
+
+<p><strong>CentOS</strong>: CentOS-7-x86_64-Everything-1611.iso  <br/>
+kernelversion=3.10.0-514.10.2.el7.x86_64,  <br/>
+operatingsystem=CentOS Linux 7 (Core)  <br/>
+<strong>Docker</strong>, pre-installed on Contiv install host： newest docker-ce from this repo:   <br/>
+<a href="https://download.docker.com/linux/centos/docker-ce.repo">https://download.docker.com/linux/centos/docker-ce.repo</a>  <br/>
+[root@master ~]# docker version
+        Client:
+        Version:      1.12.6
+        API version:  1.24
+        Go version:   go1.6.4
+        Git commit:   78d1802
+        Built:        Tue Jan 10 20:20:01 2017
+        OS/Arch:      linux/amd64
+        Server:
+        Version:      swarm/1.2.5
+        API version:  1.22
+        Go version:   go1.5.4
+        Git commit:   27968ed
+        Built:        Thu Aug 18 23:10:29 UTC 2016
+        OS/Arch:      linux/amd64  <br/>
+<strong>Contiv</strong>: contiv-full-1.0.0-beta.3.tgz , from here
+<a href="https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz">https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</a>  <br/>
+<strong>ACI</strong>: multi-POD,2.2(1n) </p>
+
+<a name="Topology"></a>
+<h3>Topology</h3>
+
+<p><img src="https://susitna.github.io/images/swarm-contiv-top.png" alt="image" />  <br/>
+if no pic, pls open it in new browser windows</p>
 ]]></content>
   </entry>
   

@@ -199,11 +199,14 @@ Swarm master physical server, also acts as Contiv Master and Swarm worker.     <
 <code>wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code>  <br/>
 <code>rpm -Uvh epel-release-latest-7.noarch.rpm</code>
 <strong>2. install required packages</strong>  <br/>
-<code>yum -y install bzip2</code>
-<code>easy_install pip</code>
-<code>pip install netaddr</code>
-<code>yum -y  install python2-crypto.x86_64</code>
-<code>yum -y install python2-paramiko</code></p>
+<code>yum -y install bzip2</code>  <br/>
+<code>easy_install pip</code>  <br/>
+<code>pip install netaddr</code>  <br/>
+<code>yum -y  install python2-crypto.x86_64</code>  <br/>
+<code>yum -y install python2-paramiko</code>  <br/>
+<strong>3. update OS</strong>  <br/>
+<code>yum makecache</code>  <br/>
+<code>yum -y upgrade</code></p>
 </div>
 
 

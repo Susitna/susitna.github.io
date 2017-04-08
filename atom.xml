@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-07T19:15:20-08:00</updated>
+  <updated>2017-04-07T19:16:18-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -29,7 +29,7 @@ One internet link for each server, same link for Swarm/Worker control interface.
 Swarm Master and worker, each has one data link to MultiPOD ACI two pods respectively.  <br/>
 <strong>Please notice</strong> there is a individual server using as   Contiv install host,this server has no other function,such as Swarm or Contiv Master  <br/>
 <img src="https://susitna.github.io/images/Swarm-Contiv-install.png" alt="image" />  <br/>
-Picture from <a href="https://github.com/contiv/install">here</a></p>
+        Picture from <a href="https://github.com/contiv/install">here</a></p>
 
 <a name="Software"></a>
 <h3>Software</h3>

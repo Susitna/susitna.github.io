@@ -4,7 +4,7 @@
   <title><![CDATA[Life Collection]]></title>
   <link href="http://susitna.github.io/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-09T02:27:40-08:00</updated>
+  <updated>2017-04-09T02:29:18-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -294,7 +294,7 @@ if completed the initial, copy and backup this one:<br/>
 [root@master k8s]# <code>ls</code><br/>
 aci_gw.yaml  auth_proxy.yaml  contiv_config.yaml  contiv.yaml  contiv.yaml.backup  etcd.yaml  install.sh  uninstall.sh<br/>
 [root@master k8s]# <code>vi contiv.yaml</code><br/>
-change the image to use this for my LAB, you can confirm from the community:
+change the netplugin version to the following for my LAB, you can confirm from the Contiv community for the newest version:
 <code>image: contiv/netplugin:1.0.0-beta.3-03-08-2017.18-51-20.UTC</code>    <br/>
 There are two place need modify in this yaml file<br/>
 [root@master contiv-1.0.0-beta.3]# <code>pwd</code><br/>

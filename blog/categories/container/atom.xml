@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Container, | Life Collection]]></title>
   <link href="http://susitna.github.io/blog/categories/container/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-08T04:09:18-08:00</updated>
+  <updated>2017-04-09T02:24:43-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -286,7 +286,7 @@ Contiv suggests using cidr 10.254.0.0/16, its the K8S cluster internal ip, servi
 if completed the initial, copy and backup this one:<br/>
 <code>kubeadm join --token=the-token-key  master-ip</code></p></li>
 <li><p>intall Contiv from master node:<br/>
-[root@master ~]# <code>curl -L -O https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</code>
+[root@master ~]# <code>curl -L -O https://github.com/contiv/install/releases/download/1.0.0-beta.3/contiv-full-1.0.0-beta.3.tgz</code>  <br/>
 [root@master ~]# <code>tar xf contiv-full-1.0.0-beta.3.tgz</code><br/>
 [root@master ~]# <code>cd contiv-1.0.0-beta.3/install/k8s/</code><br/>
 [root@master k8s]# <code>pwd</code><br/>
@@ -295,18 +295,19 @@ if completed the initial, copy and backup this one:<br/>
 aci_gw.yaml  auth_proxy.yaml  contiv_config.yaml  contiv.yaml  contiv.yaml.backup  etcd.yaml  install.sh  uninstall.sh<br/>
 [root@master k8s]# <code>vi contiv.yaml</code><br/>
 change the image to use this for my LAB, you can confirm from the community:
-<code>image: contiv/netplugin:1.0.0-beta.3-03-08-2017.18-51-20.UTC</code>    //there are two place need modify in the yaml file<br/>
+<code>image: contiv/netplugin:1.0.0-beta.3-03-08-2017.18-51-20.UTC</code>    <br/>
+There are two place need modify in this yaml file<br/>
 [root@master contiv-1.0.0-beta.3]# <code>pwd</code><br/>
 /root/contiv-1.0.0-beta.3<br/>
-[root@master contiv-1.0.0-beta.3]#<code>./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no</code>    // i didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.<br/>
-calm down and waiting :-)<br/>
-for this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.<br/>
-This time you can open another ssh terminal to monitoring the k8s pods status<br/>
+[root@master contiv-1.0.0-beta.3]#<code>./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no</code>   <br/>
+I didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.  Calm down and waiting :-)   <br/>
+For this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.   <br/>
+This time you can open another ssh terminal to monitoring the k8s pods status   <br/>
 [root@master ~]# <code>watch kubectl get pods --all-namespaces -o wide</code></p></li>
-<li><p>Join the node1/2 to master:<br/>
-on node1/2:<br/>
-<code>kubeadm join --token=the-token-key  master-ip</code><br/>
-keep watching on master to get the nodes ready:<br/>
+<li><p>Join the node1/2 to master:   <br/>
+on node1/2:   <br/>
+<code>kubeadm join --token=the-token-key  master-ip</code>   <br/>
+keep watching on master to get the nodes ready:   <br/>
 [root@master ~]#<code>watch kubectl get nodes</code></p></li>
 </ol>
 

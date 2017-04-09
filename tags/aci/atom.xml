@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: ACI | Life Collection]]></title>
   <link href="http://susitna.github.io/tags/aci/atom.xml" rel="self"/>
   <link href="http://susitna.github.io/"/>
-  <updated>2017-04-09T02:24:43-08:00</updated>
+  <updated>2017-04-09T02:27:40-08:00</updated>
   <id>http://susitna.github.io/</id>
   <author>
     <name><![CDATA[Susitna]]></name>
@@ -300,7 +300,7 @@ There are two place need modify in this yaml file<br/>
 [root@master contiv-1.0.0-beta.3]# <code>pwd</code><br/>
 /root/contiv-1.0.0-beta.3<br/>
 [root@master contiv-1.0.0-beta.3]#<code>./install/k8s/install.sh -n  master-ip  -a https://APIC-ip:443  -u  APIC-username  -p APIC-pwd  phy-domain-name-of-ACI  -e not_specified  -m no</code>   <br/>
-I didnt binding ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.  Calm down and waiting :-)   <br/>
+I didnt bind ACI Leaf switch here as suggestion, will bind the Leaf from Contiv GUI.  Calm down and waiting :-)   <br/>
 For this version of Contiv, will delete the kube-dns, this will modified by next Contiv Verion.   <br/>
 This time you can open another ssh terminal to monitoring the k8s pods status   <br/>
 [root@master ~]# <code>watch kubectl get pods --all-namespaces -o wide</code></p></li>
